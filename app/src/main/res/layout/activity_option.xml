@@ -7,40 +7,53 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <TextView
+        android:id="@+id/set_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/startTitle"
-        android:text="ParkSpot!"
-        android:textSize="36sp"
         android:layout_marginTop="50dp"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        />
+        android:gravity="center_horizontal"
+        android:text="SETTINGS"
+        android:textSize="36sp"
+        android:layout_centerHorizontal="true"/>
+
+
+    <TextView
+        android:id="@+id/theme_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Theme:"
+        android:textSize="20sp"
+        android:layout_below="@id/set_text"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"/>
+
+    <Switch
+        android:id="@+id/theme_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/theme_label"
+        android:layout_toEndOf="@id/theme_label"
+        android:layout_marginStart="20dp"/>
+
+
+
+
+
+
 
 
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
-        android:padding="10dp"
-        android:textSize="36sp"
-        android:id="@+id/startToMap"
-        android:layout_below="@id/startTitle"
-        android:text="Start"
-        android:layout_centerHorizontal="true"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:padding="10dp"
         android:textSize="36sp"
-        android:id="@+id/startToOption"
-        android:layout_below="@id/startToMap"
-        android:text="Options"
+        android:id="@+id/option_back"
+        android:layout_below="@+id/theme_switch"
+        android:text="BACK"
         android:layout_centerHorizontal="true"
 
         />
