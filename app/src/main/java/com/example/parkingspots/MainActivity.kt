@@ -17,4 +17,12 @@ class MainActivity : AppCompatActivity() {
             insets
         }
     }
+
+
+
+    companion object {
+
+
+        var lotList : ArrayList<ParkingSpot> = ArrayList<ParkingSpot>()
+    }
 }
