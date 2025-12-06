@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +33,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        MobileAds.initialize(this) {}
+        val adView = findViewById<AdView>(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
 
         startButton = findViewById<Button>(R.id.startToMap)
 
