@@ -26,4 +26,8 @@ class ParkingSpot {
 
 
     }
+
+    fun getAvailable() : Int {
+        return max - taken
+    }
 }

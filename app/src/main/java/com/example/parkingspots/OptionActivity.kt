@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.CompoundButton
 import android.widget.Switch
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -16,6 +17,8 @@ import androidx.core.content.edit
 class OptionActivity : AppCompatActivity() {
 
     private lateinit var switch : Switch
+
+    private lateinit var notificationSwitch : Switch
 
     private lateinit var pref : SharedPreferences
     private lateinit var backButton : Button
@@ -32,6 +35,10 @@ class OptionActivity : AppCompatActivity() {
         pref  = getSharedPreferences(packageName + "_preferences", Context.MODE_PRIVATE)
         switch.isChecked = pref.getBoolean("isDark", false)
         switch.setOnCheckedChangeListener(checkListener())
+
+        notificationSwitch = findViewById<Switch>(R.id.notification_switch)
+        notificationSwitch.isChecked = pref.getBoolean("notificationsEnabled", true)
+        notificationSwitch.setOnCheckedChangeListener(notificationCheckListener())
 
         backButton = findViewById<Button>(R.id.option_back)
         backButton.setOnClickListener { goBack() }
@@ -116,6 +123,17 @@ class OptionActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    inner class notificationCheckListener : CompoundButton.OnCheckedChangeListener {
+        override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
+            pref.edit { putBoolean("notificationsEnabled", isChecked) }
+            val message = if(isChecked)
+                "Notifications ON, you will receive messages about available spots"
+            else
+                "Notifications OFF"
+            Toast.makeText(this@OptionActivity, message, Toast.LENGTH_SHORT).show()
+        }
     }
 
 

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var startButton: Button
     private lateinit var optionsButton: Button
+    private var hasShownNotification = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,8 +39,6 @@ class MainActivity : AppCompatActivity() {
         optionsButton.setOnClickListener { _ -> goToOptions() }
 
 
-
-
     }
 
 
@@ -46,12 +46,17 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         changeTheme()
+        if (!hasShownNotification) {
+            showNotification()
+            hasShownNotification = true
+        }
     }
 
     fun goToOptions(){
         var newIntent : Intent = Intent(this, OptionActivity::class.java)
         startActivity(newIntent)
 
+        hasShownNotification = false
     }
     fun changeTheme(){
         var pref : SharedPreferences = this.getSharedPreferences(this.packageName + "_preferences",
@@ -76,6 +81,20 @@ class MainActivity : AppCompatActivity() {
 
             )
             recreate()
+        }
+    }
+
+    fun showNotification() {
+        val pref: SharedPreferences = getSharedPreferences(packageName + "_preferences", Context.MODE_PRIVATE)
+        val enabled = pref.getBoolean("notificationsEnabled", true)
+
+        if(enabled) {
+            var totalAvailable = 0
+            for(spot in lotList) {
+                totalAvailable += spot.getAvailable()
+            }
+
+            Toast.makeText(this, "$totalAvailable parking spots available!", Toast.LENGTH_SHORT).show()
         }
     }
 

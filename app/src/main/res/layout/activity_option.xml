@@ -37,25 +37,33 @@
         android:layout_toEndOf="@id/theme_label"
         android:layout_marginStart="20dp"/>
 
+    <TextView
+        android:id="@+id/notification_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notifications:"
+        android:textSize="20sp"
+        android:layout_below="@id/theme_label"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true" />
 
-
-
-
-
-
-
+    <Switch
+        android:id="@+id/notification_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/notification_label"
+        android:layout_toEndOf="@id/notification_label"
+        android:layout_marginStart="20dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:padding="10dp"
         android:textSize="36sp"
         android:id="@+id/option_back"
-        android:layout_below="@+id/theme_switch"
-        android:text="BACK"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-
-        />
+        android:layout_marginBottom="30dp"
+        android:text="BACK"/>
 
 </RelativeLayout>
