@@ -77,7 +77,7 @@ class ServerTaskSelect : Thread {
 
                 var name : String = jsonObject.getString("name")
                 var taken : Int = jsonObject.getInt("taken")
-                var max : Int   = jsonObject.getInt("id")
+                var max : Int   = jsonObject.getInt("max")
                 var lat : Double = jsonObject.getDouble("lat")
                 var long : Double = jsonObject.getDouble("long")
                 var tempPark : ParkingSpot = ParkingSpot(name,taken,max,lat,long)

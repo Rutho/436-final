@@ -45,6 +45,13 @@ class MainActivity : AppCompatActivity() {
 
         optionsButton.setOnClickListener { _ -> goToOptions() }
 
+        startButton.setOnClickListener { _ -> goToMap() }
+
+        var task : ServerTaskSelect = ServerTaskSelect()
+
+        task.start()
+        task.join()
+
 
     }
 
@@ -57,6 +64,14 @@ class MainActivity : AppCompatActivity() {
             showNotification()
             hasShownNotification = true
         }
+    }
+
+    fun goToMap(){
+        var newIntent : Intent = Intent(this, MapActivity::class.java)
+        startActivity(newIntent)
+
+        hasShownNotification = false
+
     }
 
     fun goToOptions(){

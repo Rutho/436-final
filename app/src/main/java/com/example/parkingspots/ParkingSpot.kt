@@ -27,6 +27,19 @@ class ParkingSpot {
 
     }
 
+    fun getPos() : LatLng{
+
+        return latLng
+
+
+    }
+
+    fun getName() : String {
+        return name
+    }
+
+
+
     fun getAvailable() : Int {
         return max - taken
     }
