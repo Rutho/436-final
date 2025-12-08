@@ -3,6 +3,7 @@ package com.example.parkingspots
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var startButton: Button
     private lateinit var optionsButton: Button
     private var hasShownNotification = false
+    private lateinit var availabilityText: TextView
 
     private lateinit var countClick : TextView
 
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         optionsButton = findViewById<Button>(R.id.startToOption)
         countClick = findViewById<Button>(R.id.count)
 
+        availabilityText = findViewById<TextView>(R.id.availabilityText)
 
         optionsButton.setOnClickListener { _ -> goToOptions() }
 
@@ -60,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         task.start()
         task.join()
 
+        updateAvailability()
         Log.w("MainActivity",Parking.lotList.toString())
 
 
@@ -77,6 +81,8 @@ class MainActivity : AppCompatActivity() {
 
         countClick.text = MainActivity.park.getParked().toString()
     }
+
+
 
     fun goToMap(){
         var newIntent : Intent = Intent(this, MapActivity::class.java)
@@ -133,7 +139,36 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun updateAvailability() {
+        var available = 0
+        var spots = 0
 
+        for(spot in lotList) {
+            available += spot.getAvailable()
+            spots += spot.getMax()
+        }
+
+        var percentTaken = 0.0
+        if (spots > 0) {
+            percentTaken = ((spots - available).toDouble() / spots.toDouble()) * 100
+        }
+
+        availabilityText.text = "$available spots available"
+
+        when {
+            percentTaken >= 75 -> {
+                availabilityText.setTextColor(Color.RED)
+            }
+
+            percentTaken >= 50 -> {
+                availabilityText.setTextColor(Color.YELLOW)
+            }
+
+            else -> {
+                availabilityText.setTextColor(Color.GREEN)
+            }
+        }
+    }
 
     companion object {
 
