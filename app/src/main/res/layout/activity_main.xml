@@ -22,20 +22,35 @@
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/startTitle"
+        android:layout_marginBottom="50dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentBottom="true"
         app:adSize="BANNER"
         app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        />
+
+    <TextView
+        android:id="@+id/availabilityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading..."
+        android:layout_marginBottom="50dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@id/startTitle"
+        android:layout_marginTop="32dp"
+        android:layout_centerHorizontal="true"
         />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="50dp"
         android:padding="10dp"
         android:textSize="36sp"
         android:id="@+id/startToMap"
-        android:layout_below="@id/startTitle"
+        android:layout_below="@id/availabilityText"
         android:text="Start"
         android:layout_centerHorizontal="true"
         />
@@ -50,7 +65,6 @@
         android:layout_below="@id/startToMap"
         android:text="Options"
         android:layout_centerHorizontal="true"
-
         />
 
 </RelativeLayout>
