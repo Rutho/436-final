@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var countClick : TextView
 
+    private lateinit var timeClock: TextClock
+    private lateinit var timeMessage: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,9 @@ class MainActivity : AppCompatActivity() {
         val adView = findViewById<AdView>(R.id.adView)
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
+
+        timeClock = findViewById(R.id.timeClock)
+        timeMessage = findViewById(R.id.timeMessage)
 
         startButton = findViewById<Button>(R.id.startToMap)
 
@@ -74,6 +80,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         changeTheme()
+        updateTimeMessage()
         if (!hasShownNotification) {
             showNotification()
             hasShownNotification = true
@@ -168,6 +175,19 @@ class MainActivity : AppCompatActivity() {
                 availabilityText.setTextColor(Color.GREEN)
             }
         }
+    }
+
+    fun updateTimeMessage() {
+        val tzone = java.time.ZoneId.of("America/New_York")
+        val curTime = java.time.ZonedDateTime.now(tzone)
+        val curHour = curTime.hour
+        val message = when (curHour) {
+            in 7..9 -> "Morning commute; greater parking activity expected."
+            in 10..15 -> "Midday; fewer spaces may be available."
+            in 16..18 -> "Evening commute; more spaces will start becoming available."
+            else -> "Overnight; most spaces will be free."
+        }    
+        timeMessage.text = message
     }
 
     companion object {
