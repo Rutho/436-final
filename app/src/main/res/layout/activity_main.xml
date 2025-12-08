@@ -93,4 +93,34 @@
         android:layout_centerHorizontal="true"
         />
 
+    <TextClock
+        android:id="@+id/timeClock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startToOption"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:format12Hour="h:mm a"
+        android:format24Hour="HH:mm"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:timeZone="America/New_York"
+        android:textColor="@android:color/white"
+        />
+
+    <TextView
+        android:id="@+id/timeMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timeClock"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:text="Parking activity prediction pending..."
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:padding="8dp"
+        android:textColor="@android:color/white"
+        />
+
 </RelativeLayout>
