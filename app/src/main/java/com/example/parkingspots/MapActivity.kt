@@ -1,7 +1,10 @@
 package com.example.parkingspots
 
 import android.os.Bundle
+import android.view.View.VISIBLE
 import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,12 +18,25 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.VisibleRegion
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     private lateinit var map : GoogleMap
+
+
+    private lateinit var addButton : Button
+    private lateinit var  removeButton : Button
+
+    private lateinit var lotName : TextView
+
+    private lateinit var dispTaken : TextView
+
+    private lateinit var dispMax : TextView
+    private lateinit var progressBar: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +49,19 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         var mapFragment : SupportMapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
 
         mapFragment.getMapAsync (this)
+
+
+        addButton = findViewById<Button>(R.id.addCar)
+        removeButton = findViewById<Button>(R.id.removeCar)
+        lotName = findViewById<TextView>(R.id.lotName)
+
+
+        dispTaken = findViewById<TextView>(R.id.takenSpots)
+        dispMax = findViewById<TextView>(R.id.maxSpots)
+        progressBar = findViewById<ProgressBar>(R.id.progressBar)
+
+
+
 
 
 
@@ -57,6 +86,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         addParkingSpots()
 
+        map.setOnMarkerClickListener (markerListener())
+
     }
 
     fun addParkingSpots() {
@@ -65,15 +96,73 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
         for (spot in MainActivity.lotList){
+            var tempMarker = MarkerOptions().position(spot.getPos()).title(spot.getName())
 
-
-            map.addMarker(MarkerOptions().position(spot.getPos()).title(spot.getName()))
+            map.addMarker(tempMarker)
 
         }
 
 
 
 
+
+    }
+
+    inner class markerListener : GoogleMap.OnMarkerClickListener {
+        override fun onMarkerClick(p0: Marker): Boolean {
+
+
+            var tempSpot : ParkingSpot? = null
+            var foundMarker = false
+            for (spot in MainActivity.lotList) {
+
+                if (p0.title == spot.getName()) {
+                    tempSpot = spot
+
+                    foundMarker = true
+                }
+
+            }
+
+            if(foundMarker){
+
+                var useSpot = tempSpot!!
+
+                addButton.visibility = VISIBLE
+                removeButton.visibility = VISIBLE
+
+                lotName.text = useSpot.getName()
+
+                dispTaken.text = useSpot.getTaken().toString()
+
+                dispMax.text = useSpot.getMax().toString()
+
+                progressBar.max = useSpot.getMax()
+
+                progressBar.setProgress(useSpot.getTaken(),true)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+
+            return true
+        }
 
     }
 }
