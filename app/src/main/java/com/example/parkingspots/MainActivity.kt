@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity() {
         var available = 0
         var spots = 0
 
-        for(spot in lotList) {
+        for(spot in Parking.lotList) {
             available += spot.getAvailable()
             spots += spot.getMax()
         }
