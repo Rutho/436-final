@@ -16,6 +16,7 @@
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
         android:gravity="center"
+
         />
 
     <com.google.android.gms.ads.AdView
@@ -26,6 +27,29 @@
         android:layout_centerHorizontal="true"
         app:adSize="BANNER"
         app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/countLabel"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/count"
+        android:text="Number Of Cars Added:"
+        android:textSize="24sp"
+
+        />
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/startToMap"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-300dp"
+        android:text="0"
+        android:textSize="24sp"
+
         />
 
     <Button

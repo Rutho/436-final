@@ -67,6 +67,8 @@ class ServerTaskSelect : Thread {
 
         if(json != "JSON_ERR"){
 
+            Parking.lotList.clear()
+
 
             var jsonArray : JSONArray = JSONArray(json)
 
@@ -82,8 +84,8 @@ class ServerTaskSelect : Thread {
                 var long : Double = jsonObject.getDouble("long")
                 var tempPark : ParkingSpot = ParkingSpot(name,taken,max,lat,long)
 
-                MainActivity.lotList.add(tempPark)
-                //Log.w("ServerTaskSelect", "${MainActivity.candies.size}")
+                Parking.lotList.add(tempPark)
+                Log.w("ServerTaskSelect", "${Parking.lotList}")
 
             }
 

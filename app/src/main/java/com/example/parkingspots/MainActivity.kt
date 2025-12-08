@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var startButton: Button
     private lateinit var optionsButton: Button
     private var hasShownNotification = false
+
+    private lateinit var countClick : TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,16 +45,22 @@ class MainActivity : AppCompatActivity() {
         startButton = findViewById<Button>(R.id.startToMap)
 
         optionsButton = findViewById<Button>(R.id.startToOption)
+        countClick = findViewById<Button>(R.id.count)
 
 
         optionsButton.setOnClickListener { _ -> goToOptions() }
 
         startButton.setOnClickListener { _ -> goToMap() }
 
+        countClick.text = MainActivity.park.getParked().toString()
+
+
         var task : ServerTaskSelect = ServerTaskSelect()
 
         task.start()
         task.join()
+
+        Log.w("MainActivity",Parking.lotList.toString())
 
 
     }
@@ -64,10 +74,13 @@ class MainActivity : AppCompatActivity() {
             showNotification()
             hasShownNotification = true
         }
+
+        countClick.text = MainActivity.park.getParked().toString()
     }
 
     fun goToMap(){
         var newIntent : Intent = Intent(this, MapActivity::class.java)
+
         startActivity(newIntent)
 
         hasShownNotification = false
@@ -112,7 +125,7 @@ class MainActivity : AppCompatActivity() {
 
         if(enabled) {
             var totalAvailable = 0
-            for(spot in lotList) {
+            for(spot in Parking.lotList) {
                 totalAvailable += spot.getAvailable()
             }
 
@@ -125,6 +138,11 @@ class MainActivity : AppCompatActivity() {
     companion object {
 
 
-        var lotList : ArrayList<ParkingSpot> = ArrayList<ParkingSpot>()
+
+        var park = Parking()
     }
+
+
+
+
 }

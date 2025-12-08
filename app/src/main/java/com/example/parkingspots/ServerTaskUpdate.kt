@@ -1,5 +1,6 @@
 package com.example.parkingspots
 
+import android.util.Log
 import org.json.JSONArray
 import org.json.JSONException
 import java.io.InputStream
@@ -11,7 +12,7 @@ class ServerTaskUpdate : Thread {
 
     private lateinit var activity: MainActivity
 
-    private lateinit var result: String
+    private  var result: String = ""
 
     private lateinit var dataString: String
 
@@ -23,9 +24,8 @@ class ServerTaskUpdate : Thread {
     private lateinit var field: String
 
 
-    constructor(activity: MainActivity, name: String, field: String, data: Any) {
+    constructor( name: String, field: String, data: Any) {
 
-        this.activity = activity
 
         this.name = name
         this.field = field
@@ -53,8 +53,8 @@ class ServerTaskUpdate : Thread {
 
             //create url
 
-            var data = "name=$name&field=$field&data=$data"
-            var url: URL = URL(update + "?$data")
+            var dataP = "name=$name&field=$field&data=$data"
+            var url: URL = URL(update + "?$dataP")
 
 
             var iStream: InputStream = url.openStream()
@@ -65,12 +65,18 @@ class ServerTaskUpdate : Thread {
                 result += scan.nextLine()
             }
 
+            Log.w("ServerTaskUpdate",dataP)
+
 
         } catch (e: Exception) {
 
 
             result = e.message.toString()
         }
+
+
+
+        Log.w("ServerTaskUpdate",result)
 
 
     }
