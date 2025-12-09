@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextClock
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -17,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import androidx.core.graphics.toColorInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -168,7 +170,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             percentTaken >= 50 -> {
-                availabilityText.setTextColor(Color.YELLOW)
+                availabilityText.setTextColor("#FFA500".toColorInt())
             }
 
             else -> {
