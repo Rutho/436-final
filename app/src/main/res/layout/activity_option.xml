@@ -29,12 +29,15 @@
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"/>
 
-    <Switch
+    <ToggleButton
         android:id="@+id/theme_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/theme_label"
         android:layout_toEndOf="@id/theme_label"
+        android:textOn="Light Mode"
+        android:textOff="Dark Mode"
+
         android:layout_marginStart="20dp"/>
 
     <TextView

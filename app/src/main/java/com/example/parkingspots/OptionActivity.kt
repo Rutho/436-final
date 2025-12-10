@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.CompoundButton
 import android.widget.Switch
 import android.widget.Toast
+import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -16,7 +17,7 @@ import androidx.core.content.edit
 
 class OptionActivity : AppCompatActivity() {
 
-    private lateinit var switch : Switch
+    private lateinit var toggle : ToggleButton
 
     private lateinit var notificationSwitch : Switch
 
@@ -29,13 +30,12 @@ class OptionActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_option)
 
-        switch = findViewById<Switch>(R.id.theme_switch)
+        toggle = findViewById<ToggleButton>(R.id.theme_switch)
 
 
         pref  = getSharedPreferences(packageName + "_preferences", Context.MODE_PRIVATE)
-        switch.isChecked = pref.getBoolean("isDark", false)
-        switch.setOnCheckedChangeListener(checkListener())
-
+        toggle.isChecked = pref.getBoolean("isDark", false)
+        toggle.setOnCheckedChangeListener(checkListener())
         notificationSwitch = findViewById<Switch>(R.id.notification_switch)
         notificationSwitch.isChecked = pref.getBoolean("notificationsEnabled", true)
         notificationSwitch.setOnCheckedChangeListener(notificationCheckListener())

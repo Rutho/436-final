@@ -31,6 +31,10 @@
         app:layout_constraintStart_toStartOf="parent">
 
 
+
+
+
+
         <TextView
             android:id="@+id/lotLabel"
             android:layout_width="wrap_content"
@@ -81,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:id="@+id/spotsSpace"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="100dp"
             >
@@ -139,6 +144,7 @@
                 android:id="@+id/maxSpots"
                 android:textColor="@color/black"
                 android:textSize="22sp"/>
+
             
         </LinearLayout>
 

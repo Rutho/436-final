@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.VisibleRegion
+import java.util.Timer
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -76,7 +77,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         backButton.setOnClickListener{goBack()}
 
 
+        var timerTask : UpdateTimerTask = UpdateTimerTask(this)
 
+        var timer : Timer = Timer()
+
+        timer.schedule(timerTask,4000,4000)
 
 
 
@@ -243,6 +248,51 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         finish()
     }
 
+
+    fun refresh (){
+
+        var tempTask = ServerTaskSelect()
+        tempTask.start()
+        tempTask.join()
+
+        //map.clear()
+
+        //addParkingSpots()
+        if(currentSpot != null) {
+            for (spot in Parking.lotList) {
+                if (currentSpot!!.getName() == spot.getName()){
+                    currentSpot = spot
+                }
+            }
+
+
+            updateUi(currentSpot!!)
+
+
+
+
+
+        }
+
+
+
+    }
+
+    fun updateUi(spot : ParkingSpot){
+
+        lotName.text = spot.getName()
+
+        dispTaken.text = spot.getTaken().toString()
+
+        dispMax.text = spot.getMax().toString()
+
+        progressBar.max = spot.getMax()
+
+        progressBar.setProgress(spot.getTaken(),true)
+
+
+    }
+
     fun addParkingSpots() {
 
 
@@ -285,15 +335,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 addButton.visibility = VISIBLE
                 removeButton.visibility = VISIBLE
 
-                lotName.text = useSpot.getName()
-
-                dispTaken.text = useSpot.getTaken().toString()
-
-                dispMax.text = useSpot.getMax().toString()
-
-                progressBar.max = useSpot.getMax()
-
-                progressBar.setProgress(useSpot.getTaken(),true)
+                updateUi(tempSpot)
 
 
 
