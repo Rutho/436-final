@@ -20,6 +20,18 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import androidx.core.graphics.toColorInt
 
+/*
+Members: Jonas Bessanh, Seth Buus, Ryley Haynes
+
+Participation:
+
+Jonas: 33.3%
+Seth: 33.3%
+Ryley: 33.3%
+ */
+
+
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var startButton: Button
